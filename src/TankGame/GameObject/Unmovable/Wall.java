@@ -1,5 +1,6 @@
 package TankGame.GameObject.Unmovable;
 
+import TankGame.GameObject.Moveable.Bullet;
 import TankGame.GameObject.Moveable.Tank;
 import TankGame.PlayerManager;
 
@@ -25,6 +26,25 @@ public class Wall extends Unmovable {
         Tank p1 = playerManager.getPlayer1();
         Tank p2 = playerManager.getPlayer2();
 
+        handleCollisionWithTank(p1, p2);
+        handleCollisionWithBullets(p1, p2);
+    }
+
+    private void handleCollisionWithBullets(Tank p1, Tank p2) {
+        for (Bullet bullet: p1.getBullets()) {
+            if (isCollision(bullet)) {
+                bullet.setVisible(false);
+            }
+        }
+
+        for (Bullet bullet: p2.getBullets()) {
+            if (isCollision(bullet)) {
+                bullet.setVisible(false);
+            }
+        }
+    }
+
+    private void handleCollisionWithTank(Tank p1, Tank p2) {
         if (p1.isCollision(this)) {
             if (p1.getX() > getX()) {
                 p1.setX(p1.getX() + p1.getSpeed() + 1); // set back (speed + 1) distance that tank can be "bounced" back from wall

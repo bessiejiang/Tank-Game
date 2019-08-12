@@ -18,10 +18,10 @@ public class GameObject implements Observer {
         this.width = img.getWidth(null);
     }
 
-    public void setImage(BufferedImage img){
-        this.img = img;
-        height = img.getHeight();
-        width = img.getWidth();
+    public boolean isCollision(GameObject target) {
+        Rectangle selfRect = new Rectangle(x, y, width, height);
+        Rectangle targetRect = new Rectangle(target.getX(), target.getY(), target.getWidth(), target.getHeight());
+        return selfRect.intersects(targetRect);
     }
 
     public int getX(){ return x; }

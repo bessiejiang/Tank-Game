@@ -1,5 +1,6 @@
 package TankGame;
 
+import TankGame.GameObject.Moveable.Bullet;
 import TankGame.GameObject.Moveable.Tank;
 import TankGame.GameObject.ResourceField;
 import TankGame.GameObject.Unmovable.Wall;
@@ -194,7 +195,7 @@ public class GamePanel extends JPanel {
 
         float angle = computeAngle(tank1, tank2);
         float angleToRotateWithDirection = angle - 180 - tank2.getAngle(); // High school maths here
-        if (Math.abs(angleToRotateWithDirection) < 330 ) {
+        if (Math.abs(angleToRotateWithDirection) < 330) {
             if (angleToRotateWithDirection < 0) {
                 tank2.switchRightOff();
                 tank2.switchLeftOn();
@@ -239,8 +240,17 @@ public class GamePanel extends JPanel {
     }
 
     private void drawTanks(Graphics2D g) {
-        playerManager.getPlayer1().draw(g);
-        playerManager.getPlayer2().draw(g);
+        Tank tank1 = playerManager.getPlayer1();
+        Tank tank2 = playerManager.getPlayer2();
+        tank1.draw(g);
+        tank2.draw(g);
+
+        for (Bullet bullet: tank1.getBullets()) {
+            bullet.draw(g);
+        }
+        for (Bullet bullet: tank2.getBullets()) {
+            bullet.draw(g);
+        }
     }
 
     private List<Wall> createWallList() {

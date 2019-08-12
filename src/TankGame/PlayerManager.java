@@ -22,8 +22,11 @@ public class PlayerManager {
         BufferedImage tank1 = spriteLoader.loadSprite(ResourceField.TANK1);
         BufferedImage tank2 = spriteLoader.loadSprite(ResourceField.TANK2);
 
-        player1 = new Tank(tank1, TANK1_X, TANK1_Y, TANK_SPEED, TANK_TURN_SPEED, gameObs);
-        player2 = new Tank(tank2, TANK2_X, TANK2_Y, TANK_SPEED, TANK_TURN_SPEED, gameObs);
+        player1 = new Tank(tank1, TANK1_X, TANK1_Y, TANK_SPEED, TANK_TURN_SPEED, gameObs, spriteLoader);
+        player2 = new Tank(tank2, TANK2_X, TANK2_Y, TANK_SPEED, TANK_TURN_SPEED, gameObs, spriteLoader);
+
+        player1.setRivalTank(player2);
+        player2.setRivalTank(player1);
 
         // Let two tanks face each other
         player2.setAngle(180);
