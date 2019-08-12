@@ -12,12 +12,15 @@ import java.util.Observable;
 
 public class Tank extends Movable {
     private static int FIRE_COOL_DOWN = 75;
+    private static int LIFE_COLL_DOWN = 100;
     private static int LIFE_POINT = 100;
 
     private int angle;
     private int turnSpeed;
     private int fireCoolDown;
+    private int lifeCoolDown;
     private int lifePoint;
+    private int originX, originY;
     private boolean moveLeft, moveRight, moveUp, moveDown, shootable;
     private SpriteLoader spriteLoader;
     private Observable gameObs;
@@ -26,9 +29,12 @@ public class Tank extends Movable {
 
     public Tank(BufferedImage img, int x, int y, int speed, int turnSpeed, Observable gameObs, SpriteLoader spriteLoader){
         super(img, x, y, speed);
+        this.originX = x;
+        this.originY = y;
         this.turnSpeed = turnSpeed;
         this.angle = 0;
         this.fireCoolDown = 0;
+        this.lifeCoolDown = LIFE_COLL_DOWN;
         this.lifePoint = LIFE_POINT;
         this.moveLeft = false;
         this.moveRight = false;
@@ -81,6 +87,13 @@ public class Tank extends Movable {
                 x = ((int) (x - Math.round(speed * Math.cos(Math.toRadians(angle)))));
                 y = ((int) (y - Math.round(speed * Math.sin(Math.toRadians(angle)))));
             }
+        } else if (lifeCoolDown != 0) {
+            lifeCoolDown--;
+        } else {
+            lifeCoolDown = LIFE_COLL_DOWN;
+            lifePoint = LIFE_POINT;
+            x = originX;
+            y = originY;
         }
     }
 
