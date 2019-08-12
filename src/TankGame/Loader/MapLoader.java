@@ -1,4 +1,5 @@
-package Loader;
+package TankGame.Loader;
 
 public class MapLoader {
+
 }

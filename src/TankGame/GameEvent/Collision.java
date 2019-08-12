@@ -1,4 +1,4 @@
-package GameEvent;
+package TankGame.GameEvent;
 
 public class Collision {
 }
