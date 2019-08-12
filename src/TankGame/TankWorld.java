@@ -2,6 +2,7 @@ package TankGame;
 
 import TankGame.GameObject.GameObservable;
 import TankGame.GameObject.Moveable.Tank;
+import TankGame.GameObject.ResourceField;
 import TankGame.Loader.SoundLoader;
 import TankGame.Loader.SpriteLoader;
 
@@ -33,13 +34,14 @@ public class TankWorld implements Runnable{
 
     @Override
     public void run() {
+        soundLoader.playSound(ResourceField.MUSIC, true);
         initViewPanels();
         try {
             while(true) {
                 gameObs.setChanged();
                 gameObs.notifyObservers();
                 gamePanel.repaint();
-                Thread.sleep(1000 / 144); // TODO replace with meaningful interval
+                Thread.sleep(7);
             }
         } catch (InterruptedException e) {
             LOGGER.log(Level.SEVERE, "The game failed with unexpected errors", e);
