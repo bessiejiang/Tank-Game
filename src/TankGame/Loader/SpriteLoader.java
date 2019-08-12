@@ -18,11 +18,11 @@ public class SpriteLoader {
     private static Map<ResourceField, String> spritesMap = new HashMap<>();
 
     public SpriteLoader() {
-        spritesMap.put(BACKGROUND, "src/TankGame/resources/Background.bmp");
-        spritesMap.put(WALL, "src/TankGame/resources/Wall1.gif");
+        spritesMap.put(BACKGROUND, "src/TankGame/resources/Background.jpeg");
+        spritesMap.put(WALL, "src/TankGame/resources/Wall1.png");
         spritesMap.put(BREAKABLE_WALL, "src/TankGame/resources/Wall2.gif");
-        spritesMap.put(TANK1, "src/TankGame/resources/Tank1edit.gif");
-        spritesMap.put(TANK2, "src/TankGame/resources/Tank2edit.gif");
+        spritesMap.put(TANK1, "src/TankGame/resources/Tank1.png");
+        spritesMap.put(TANK2, "src/TankGame/resources/Tank2.png");
         spritesMap.put(BULLET, "src/TankGame/resources/Shelledit2.gif");
     }
 
