@@ -7,9 +7,12 @@ import TankGame.Loader.SpriteLoader;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 public class GamePanel extends JPanel {
     // width: 52    height: 44
@@ -72,11 +75,22 @@ public class GamePanel extends JPanel {
     private PlayerManager playerManager;
     private SpriteLoader spriteLoader;
     private List<Wall> wallList;
+    private Observable gameObs;
 
-    public GamePanel(PlayerManager playerManager, SpriteLoader spriteLoader) {
+    public GamePanel(PlayerManager playerManager, SpriteLoader spriteLoader, Observable gameObs) {
         super();
+
+        // Need to have this to keep key input active when switched to this panel using Java awt card layout
+        this.addComponentListener( new ComponentAdapter() {
+            @Override
+            public void componentShown( ComponentEvent e ) {
+                GamePanel.this.requestFocusInWindow();
+            }
+        });
+
         this.playerManager = playerManager;
         this.spriteLoader = spriteLoader;
+        this.gameObs = gameObs;
 
         isOnePlayerMode = false;
         wallList = createWallList();
@@ -131,11 +145,18 @@ public class GamePanel extends JPanel {
         g.drawImage(window2, FRAME_WIDTH / 2, 0, this);
         g.drawImage(mini_window, 0, FRAME_HEIGHT - MINI_MAP_HEIGHT - 20, this);
 
-        // borders
-//        g.setColor(Color.BLACK);
-//        g.draw3DRect(0, 0, (windowWidth/2)-1, windowHeight-22, true);
-//        g.draw3DRect(windowWidth/2, 0, (windowWidth/2)-1, windowHeight-2, true);
-//        g.draw3DRect(0, windowHeight - minimapHeight - 20, minimapWidth, minimapHeight, true);
+        // Paint borders for split windows and mini window
+        Graphics2D boardG2 = (Graphics2D) g;
+        boardG2.setColor(Color.BLACK);
+        float thickness = 5;
+        Stroke oldStroke = boardG2.getStroke();
+        boardG2.setStroke(new BasicStroke(thickness));
+
+        boardG2.drawRect(0, 0, FRAME_WIDTH / 2, FRAME_HEIGHT);
+        boardG2.drawRect(FRAME_WIDTH / 2, 0, FRAME_WIDTH / 2, FRAME_HEIGHT);
+        boardG2.drawRect(0, FRAME_HEIGHT - MINI_MAP_HEIGHT - 20, MINI_MAP_WIDTH, MINI_MAP_HEIGHT);
+
+        boardG2.setStroke(oldStroke); // set back old stroke
     }
 
     // Compute the split window location X
@@ -228,7 +249,7 @@ public class GamePanel extends JPanel {
             for (int col = 0; col < LAYOUT[0].length; col++) {
                 if (LAYOUT[row][col] == ResourceField.WALL.getVal()) {
                     BufferedImage wall = spriteLoader.loadSprite(ResourceField.WALL);
-                    walls.add(new Wall(col * WALL_SIZE, row * WALL_SIZE, wall));
+                    walls.add(new Wall(col * WALL_SIZE, row * WALL_SIZE, wall, playerManager, gameObs));
                 }
             }
         }

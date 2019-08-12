@@ -8,36 +8,26 @@ import java.util.Observable;
 
 public class Tank extends Movable {
 
-    private int left, right, up, down, shoot;
     private int angle;
+    private int turnSpeed;
     private boolean moveLeft, moveRight, moveUp, moveDown, shootable;
 
-    public Tank(BufferedImage img, int x, int y, int speed, int left, int right, int up, int down, int shoot){
+    public Tank(BufferedImage img, int x, int y, int speed, int turnSpeed, Observable gameObs){
         super(img, x, y, speed);
-        this.left = left;
-        this.right = right;
-        this.up = up;
-        this.down = down;
-        this.shoot = shoot;
+        this.turnSpeed = turnSpeed;
         this.angle = 0;
         this.moveLeft = false;
         this.moveRight = false;
         this.moveUp = false;
         this.moveDown = false;
         this.shootable = false;
+        gameObs.addObserver(this);
     }
 
-    public void turn(int angle){
-        this.angle += this.angle;
-        this.angle = this.angle %360;
-        if (this.angle < 0) {
-            this.angle = angle + 360;
-        }
-    }
-
-    public boolean isCollision(GameObject go) {
-        Rectangle pos2 = new Rectangle(go.getX(), go.getY(), go.getWidth(), go.getHeight());
-        return pos.intersects(pos2);
+    public boolean isCollision(GameObject gameObject) {
+        Rectangle tankRect = new Rectangle(x, y, width, height);
+        Rectangle gameObjRect = new Rectangle(gameObject.getX(), gameObject.getY(), gameObject.getWidth(), gameObject.getHeight());
+        return tankRect.intersects(gameObjRect);
     }
 
     public void draw(Graphics2D g) {
@@ -48,7 +38,20 @@ public class Tank extends Movable {
 
     @Override
     public void update(Observable o, Object arg) {
-
+        if (moveLeft){
+            angle -= turnSpeed;
+        }
+        if (moveRight){
+            angle += turnSpeed;
+        }
+        if (moveUp){
+            x = ((int) (x + Math.round(speed * Math.cos(Math.toRadians(angle)))));
+            y = ((int) (y + Math.round(speed * Math.sin(Math.toRadians(angle)))));
+        }
+        if (moveDown){
+            x = ((int) (x - Math.round(speed * Math.cos(Math.toRadians(angle)))));
+            y = ((int) (y - Math.round(speed * Math.sin(Math.toRadians(angle)))));
+        }
     }
 
     public void setAngle(int angle) {
