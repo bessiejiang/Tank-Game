@@ -3,11 +3,13 @@ package TankGame.GameObject;
 public enum ResourceField {
     // Sprites
     BACKGROUND(0),
-    WALL(1),
+    UNBREAKABLEWALL(1),
     BREAKABLE_WALL(2),
     TANK1(3),
     TANK2(4),
     BULLET(5),
+    POWERUP(7),
+    //LifeIcon(8),
 
     // Sounds
     MUSIC(6);

@@ -29,6 +29,7 @@ public class TankWorld implements Runnable{
         playerManager = new PlayerManager(spriteLoader, gameObs);
         gamePanel = new GamePanel(playerManager, spriteLoader, gameObs);
         modePanel = new ModePanel();
+        modePanel.setLayout(null);
         keyController = new KeyController(playerManager);
     }
 
@@ -63,8 +64,11 @@ public class TankWorld implements Runnable{
         container.add(modePanel, "mode");
 
         JButton humanVsHumanBtn = new JButton("Human vs Human");
-        humanVsHumanBtn.setPreferredSize(new Dimension(500, 150));
-        humanVsHumanBtn.setFont(new Font("TimesRoman", Font.PLAIN, 50));
+        humanVsHumanBtn.setBounds(270, 420, 350,50);
+        humanVsHumanBtn.setOpaque(false);
+        humanVsHumanBtn.setContentAreaFilled(false);
+        humanVsHumanBtn.setBorderPainted(false);
+        humanVsHumanBtn.setFont(new Font("Courier", Font.BOLD, 32));
         humanVsHumanBtn.addActionListener(e -> {
             gamePanel.setOnePlayerMode(false);
             gamePanel.addKeyListener(keyController);
@@ -72,8 +76,11 @@ public class TankWorld implements Runnable{
         });
 
         JButton humanVsComputerBtn = new JButton("Human vs Computer");
-        humanVsComputerBtn.setPreferredSize(new Dimension(500, 150));
-        humanVsComputerBtn.setFont(new Font("TimesRoman", Font.PLAIN, 50));
+        humanVsComputerBtn.setBounds(275, 480, 350,50);
+        humanVsComputerBtn.setOpaque(false);
+        humanVsComputerBtn.setContentAreaFilled(false);
+        humanVsComputerBtn.setBorderPainted(false);
+        humanVsComputerBtn.setFont(new Font("Courier", Font.BOLD, 30));
         humanVsComputerBtn.addActionListener(e -> {
             gamePanel.setOnePlayerMode(true);
             Tank tank2 = playerManager.getPlayer2();

@@ -20,6 +20,7 @@ public class Tank extends Movable {
     private int fireCoolDown;
     private int lifeCoolDown;
     private int lifePoint;
+    private int lifeCount;
     private int originX, originY;
     private boolean moveLeft, moveRight, moveUp, moveDown, shootable;
     private SpriteLoader spriteLoader;
@@ -36,6 +37,7 @@ public class Tank extends Movable {
         this.fireCoolDown = 0;
         this.lifeCoolDown = LIFE_COLL_DOWN;
         this.lifePoint = LIFE_POINT;
+        this.lifeCount = 3;
         this.moveLeft = false;
         this.moveRight = false;
         this.moveUp = false;
@@ -72,6 +74,7 @@ public class Tank extends Movable {
             }
 
             handleCollisionWithBullets();
+            handleCollisionWithTank();
 
             if (moveLeft) {
                 angle -= turnSpeed;
@@ -108,6 +111,8 @@ public class Tank extends Movable {
     public int getAngle() {
         return this.angle;
     }
+
+    public int getLifeCount() { return this.lifeCount; }
 
     public void switchUpOn() {
         this.moveUp = true;
@@ -166,6 +171,25 @@ public class Tank extends Movable {
             if (bullet.isVisible() && isCollision(bullet)) {
                 lifePoint -= Bullet.POWER;
                 bullet.setVisible(false);
+            }
+        }
+    }
+
+    private void handleCollisionWithTank(){
+        if(this.isCollision(rivalTank)){
+            if (x > rivalTank.x) {
+                x += speed * 2;
+                rivalTank.x -= speed * 2;
+            } else if (x < rivalTank.x) {
+                x -= speed * 2;
+                rivalTank.x += speed * 2;
+            }
+            if (y > rivalTank.y) {
+                y += speed * 2;
+                rivalTank.y -= speed * 2;
+            } else if (y < rivalTank.y) {
+                y -= speed * 2;
+                rivalTank.y += speed * 2;
             }
         }
     }

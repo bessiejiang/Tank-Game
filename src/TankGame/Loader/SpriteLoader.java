@@ -18,11 +18,12 @@ public class SpriteLoader {
 
     public SpriteLoader() {
         spritesMap.put(BACKGROUND, "/TankGame/resources/Background.jpeg");
-        spritesMap.put(WALL, "/TankGame/resources/Wall1.png");
-        spritesMap.put(BREAKABLE_WALL, "/TankGame/resources/Wall2.gif");
+        spritesMap.put(UNBREAKABLEWALL, "/TankGame/resources/Wall1.png");
+        spritesMap.put(BREAKABLE_WALL, "/TankGame/resources/Wall2.png");
         spritesMap.put(TANK1, "/TankGame/resources/Tank1.png");
-        spritesMap.put(TANK2, "/TankGame/resources/Tank2.png");
+        spritesMap.put(TANK2, "/TankGame/resources/Tank2.png"  );
         spritesMap.put(BULLET, "/TankGame/resources/Bullet.gif");
+        spritesMap.put(POWERUP, "/TankGame/resources/powerUp.png");
     }
 
     public BufferedImage loadSprite(ResourceField field) {

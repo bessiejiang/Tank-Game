@@ -1,5 +1,7 @@
 package TankGame.GameObject.Moveable;
 
+import TankGame.GamePanel;
+
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -8,9 +10,9 @@ import java.util.Observable;
 public class Bullet extends Movable {
     public static final int POWER = 15;
     private static final int SPEED = 5;
-
     private int angle;
     private boolean isVisible;
+    private GamePanel g;
 
     public Bullet(BufferedImage img, int x, int y, int angle) {
         super(img, x, y, SPEED);
