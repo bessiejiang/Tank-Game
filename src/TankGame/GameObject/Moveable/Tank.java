@@ -12,7 +12,7 @@ import java.util.Observable;
 
 public class Tank extends Movable {
     private static int FIRE_COOL_DOWN = 75;
-    private static int LIFE_COLL_DOWN = 100;
+    private static int LIFE_COOL_DOWN = 100;
     private static int LIFE_POINT = 100;
 
     private int angle;
@@ -35,7 +35,7 @@ public class Tank extends Movable {
         this.turnSpeed = turnSpeed;
         this.angle = 0;
         this.fireCoolDown = 0;
-        this.lifeCoolDown = LIFE_COLL_DOWN;
+        this.lifeCoolDown = LIFE_COOL_DOWN;
         this.lifePoint = LIFE_POINT;
         this.lifeCount = 3;
         this.moveLeft = false;
@@ -93,7 +93,7 @@ public class Tank extends Movable {
         } else if (lifeCoolDown != 0) {
             lifeCoolDown--;
         } else {
-            lifeCoolDown = LIFE_COLL_DOWN;
+            lifeCoolDown = LIFE_COOL_DOWN;
             lifePoint = LIFE_POINT;
             x = originX;
             y = originY;
@@ -113,6 +113,8 @@ public class Tank extends Movable {
     }
 
     public int getLifeCount() { return this.lifeCount; }
+
+    public int getLifePoint() { return this.lifePoint; }
 
     public void switchUpOn() {
         this.moveUp = true;

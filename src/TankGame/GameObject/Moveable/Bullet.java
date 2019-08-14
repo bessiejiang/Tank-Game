@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.Observable;
 
 public class Bullet extends Movable {
-    public static final int POWER = 15;
+    public static final int POWER = 10;
     private static final int SPEED = 5;
     private int angle;
     private boolean isVisible;

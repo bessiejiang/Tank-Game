@@ -36,16 +36,23 @@ public class BreakableWall extends Wall {
     }
 
     private void handleCollisionWithBullets(Tank p1, Tank p2) {
+        int breakage = 0;
         for (Bullet bullet : p1.getBullets()) {
             if (isCollision(bullet)) {
-                isBroken = true;
+                breakage++;
+                if(breakage >= 2){
+                    isBroken = true;
+                }
                 bullet.setVisible(false);
             }
         }
-
+        breakage = 0;
         for (Bullet bullet : p2.getBullets()) {
             if (isCollision(bullet)) {
-                isBroken = true;
+                breakage++;
+                if(breakage >= 2){
+                    isBroken = true;
+                }
                 bullet.setVisible(false);
             }
         }

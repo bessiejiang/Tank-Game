@@ -154,12 +154,13 @@ public class GamePanel extends JPanel {
 
         // Paint borders for split windows and mini window
         Graphics2D boardG2 = (Graphics2D) g;
+        drawHealthAndLives(boardG2);
         float thickness = 3;
 
         //set transparency of frame lines
-        float alpha = (float) 0.4;
-        Color color = new Color(1, 0,0, alpha);
-        boardG2.setPaint(color);
+//        float alpha = (float) 0.3;
+//        Color color = new Color(1, 0,0);
+        boardG2.setPaint(Color.black);
 
         Stroke oldStroke = boardG2.getStroke();
         boardG2.setStroke(new BasicStroke(thickness));
@@ -265,6 +266,37 @@ public class GamePanel extends JPanel {
         for (PowerUp p: powerUpList) {
             p.draw(g);
         }
+    }
+
+    private void drawHealthAndLives(Graphics2D g){
+        int t1Health = playerManager.getPlayer1().getLifePoint();
+        int t2Health = playerManager.getPlayer2().getLifePoint();
+
+        int t1LifeCount = playerManager.getPlayer1().getLifeCount();
+        int t2LifeCount = playerManager.getPlayer2().getLifeCount();
+
+        int t1HealthBarX = 40;
+        int t1HealthBarY = 10;
+
+        int t2HealthBarX = 570;
+        int t2HealthBarY = 10;
+
+        int healthWidth = 220;
+        int healthHeight = 10;
+
+        float t1healthRatio = (float) t1Health / 100;
+        float t2healthRatio = (float) t2Health / 100;
+
+
+        //health bar frame
+        g.setPaint(Color.black);
+        g.drawRect(t1HealthBarX, t1HealthBarY, healthWidth, healthHeight);
+        g.drawRect(t2HealthBarX, t2HealthBarY, healthWidth, healthHeight);
+
+        //health depleted
+        g.setPaint(Color.green);
+        g.fillRect(t1HealthBarX, t1HealthBarY, (int)(healthWidth * t1healthRatio), healthHeight);
+        g.fillRect(t2HealthBarX + (int)(healthWidth *( 1 - t2healthRatio)), t2HealthBarY, (int)(healthWidth * t2healthRatio), healthHeight);
 
 
     }
