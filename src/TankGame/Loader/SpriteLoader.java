@@ -23,7 +23,12 @@ public class SpriteLoader {
         spritesMap.put(TANK1, "/TankGame/resources/Tank1.png");
         spritesMap.put(TANK2, "/TankGame/resources/Tank2.png"  );
         spritesMap.put(BULLET, "/TankGame/resources/Bullet.gif");
-        spritesMap.put(POWERUP, "/TankGame/resources/powerUp.png");
+        spritesMap.put(LIFEPOWERUP, "/TankGame/resources/LifePowerUp.png");
+        spritesMap.put(BULLETPOWERUP, "/TankGame/resources/Strengthen.png");
+        spritesMap.put(LIFEICON1, "/TankGame/resources/LifeIcon1.png");
+        spritesMap.put(LIFEICON2, "/TankGame/resources/LifeIcon2.png");
+
+
     }
 
     public BufferedImage loadSprite(ResourceField field) {

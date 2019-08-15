@@ -1,21 +1,18 @@
 package TankGame.GameObject.Moveable;
 
-import TankGame.GamePanel;
-
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 
 public class Bullet extends Movable {
-    public static final int POWER = 10;
-    private static final int SPEED = 5;
+    public static int power = 10;
+    private static int speed = 5;
     private int angle;
     private boolean isVisible;
-    private GamePanel g;
 
     public Bullet(BufferedImage img, int x, int y, int angle) {
-        super(img, x, y, SPEED);
+        super(img, x, y, speed);
         this.angle = angle;
         this.isVisible = true;
     }
@@ -40,7 +37,10 @@ public class Bullet extends Movable {
         this.isVisible = isVisible;
     }
 
+    public void setPower(int power){ this.power = power; }
+
     public boolean isVisible() {
         return isVisible;
     }
+
 }

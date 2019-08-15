@@ -1,5 +1,6 @@
 package TankGame.GameObject.Unmovable;
 
+import TankGame.GameObject.Moveable.Bullet;
 import TankGame.GameObject.Moveable.Tank;
 import TankGame.PlayerManager;
 
@@ -7,13 +8,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 
-public class PowerUp extends Unmovable{
-
+public class StrengthenBulletPowerUp extends PowerUp {
     boolean picked = false;
-    private PlayerManager playerManager;
+    private final PlayerManager playerManager;
 
-    public PowerUp(BufferedImage img, int x, int y, PlayerManager playerManager, Observable gameObs) {
-        super(img, x, y);
+    public StrengthenBulletPowerUp(BufferedImage img, int x, int y, PlayerManager playerManager, Observable gameObs) {
+        super(img, x, y, playerManager, gameObs);
         gameObs.addObserver(this);
         this.playerManager = playerManager;
     }
@@ -33,6 +33,17 @@ public class PowerUp extends Unmovable{
     }
 
     private void handleCollisionWithTank(Tank p1, Tank p2) {
+        if (p1.isCollision(this) && (picked == false)){
+            picked = true;
+            Bullet.power = Bullet.power + 5;
 
+            //p1.setLifeCount(p1.getLifeCount() + 1);
+        }
+
+        if (p2.isCollision(this) && (picked == false)){
+            picked = true;
+            Bullet.power = Bullet.power + 5;
+            //p2.setLifeCount(p2.getLifeCount() + 1);
+        }
     }
 }

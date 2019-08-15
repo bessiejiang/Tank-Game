@@ -97,6 +97,7 @@ public class Tank extends Movable {
             lifePoint = LIFE_POINT;
             x = originX;
             y = originY;
+            lifeCount--;
         }
     }
 
@@ -110,6 +111,10 @@ public class Tank extends Movable {
 
     public int getAngle() {
         return this.angle;
+    }
+
+    public void setLifeCount(int count) {
+        lifeCount = count;
     }
 
     public int getLifeCount() { return this.lifeCount; }
@@ -171,7 +176,7 @@ public class Tank extends Movable {
     private void handleCollisionWithBullets() {
         for (Bullet bullet: rivalTank.getBullets()) {
             if (bullet.isVisible() && isCollision(bullet)) {
-                lifePoint -= Bullet.POWER;
+                lifePoint -= Bullet.power;
                 bullet.setVisible(false);
             }
         }

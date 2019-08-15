@@ -19,6 +19,7 @@ public class TankWorld implements Runnable{
     private SoundLoader soundLoader;
     private GamePanel gamePanel;
     private ModePanel modePanel;
+    private WinOrLosePanel winOrLosePanel;
     private PlayerManager playerManager;
     private KeyController keyController;
 
@@ -29,6 +30,7 @@ public class TankWorld implements Runnable{
         playerManager = new PlayerManager(spriteLoader, gameObs);
         gamePanel = new GamePanel(playerManager, spriteLoader, gameObs);
         modePanel = new ModePanel();
+        winOrLosePanel = new WinOrLosePanel();
         modePanel.setLayout(null);
         keyController = new KeyController(playerManager);
     }
@@ -62,6 +64,7 @@ public class TankWorld implements Runnable{
         JPanel container = new JPanel(cl);
         container.add(gamePanel, "game");
         container.add(modePanel, "mode");
+        container.add(winOrLosePanel, "winOrLose");
 
         JButton humanVsHumanBtn = new JButton("Human vs Human");
         humanVsHumanBtn.setBounds(270, 420, 350,50);

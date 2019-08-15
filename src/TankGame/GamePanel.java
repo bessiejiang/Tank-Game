@@ -3,10 +3,7 @@ package TankGame;
 import TankGame.GameObject.Moveable.Bullet;
 import TankGame.GameObject.Moveable.Tank;
 import TankGame.GameObject.ResourceField;
-import TankGame.GameObject.Unmovable.BreakableWall;
-import TankGame.GameObject.Unmovable.PowerUp;
-import TankGame.GameObject.Unmovable.UnbreakableWall;
-import TankGame.GameObject.Unmovable.Wall;
+import TankGame.GameObject.Unmovable.*;
 import TankGame.Loader.SpriteLoader;
 
 import javax.swing.*;
@@ -45,7 +42,7 @@ public class GamePanel extends JPanel {
         {1,0,0,0,0,1,2,2,2,2,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,2,2,2,2,1,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -272,9 +269,6 @@ public class GamePanel extends JPanel {
         int t1Health = playerManager.getPlayer1().getLifePoint();
         int t2Health = playerManager.getPlayer2().getLifePoint();
 
-        int t1LifeCount = playerManager.getPlayer1().getLifeCount();
-        int t2LifeCount = playerManager.getPlayer2().getLifeCount();
-
         int t1HealthBarX = 40;
         int t1HealthBarY = 10;
 
@@ -287,7 +281,7 @@ public class GamePanel extends JPanel {
         float t1healthRatio = (float) t1Health / 100;
         float t2healthRatio = (float) t2Health / 100;
 
-
+        //draw health bar
         //health bar frame
         g.setPaint(Color.black);
         g.drawRect(t1HealthBarX, t1HealthBarY, healthWidth, healthHeight);
@@ -298,6 +292,30 @@ public class GamePanel extends JPanel {
         g.fillRect(t1HealthBarX, t1HealthBarY, (int)(healthWidth * t1healthRatio), healthHeight);
         g.fillRect(t2HealthBarX + (int)(healthWidth *( 1 - t2healthRatio)), t2HealthBarY, (int)(healthWidth * t2healthRatio), healthHeight);
 
+        //draw live count
+        int t1LivesX = 270;
+        int t1LivesY = 0;
+
+        int t2LivesX = 530;
+        int t2LivesY = 0;
+
+
+        int t1LifeCount = playerManager.getPlayer1().getLifeCount();
+        int t2LifeCount = playerManager.getPlayer2().getLifeCount();
+
+        // tank1 live count
+        BufferedImage tank1Icon = spriteLoader.loadSprite(ResourceField.LIFEICON1);
+        g.drawImage(tank1Icon, t1LivesX, t1LivesY, null);
+        g.setPaint(Color.red);
+        g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        g.drawString("* " + t1LifeCount, 310, 22);
+
+        // tank2 live count
+        BufferedImage tank2Icon = spriteLoader.loadSprite(ResourceField.LIFEICON2);
+        g.drawImage(tank2Icon, t2LivesX, t2LivesY, null);
+        g.setPaint(Color.red);
+        g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        g.drawString(t2LifeCount + " *", 500, 22);
 
     }
 
@@ -322,10 +340,15 @@ public class GamePanel extends JPanel {
         List<PowerUp> powerUps = new ArrayList<>();
         for (int row = 0; row < LAYOUT.length; row++) {
             for (int col = 0; col < LAYOUT[0].length; col++) {
-                if (LAYOUT[row][col] == ResourceField.POWERUP.getVal()) {
-                    BufferedImage powerUp = spriteLoader.loadSprite(ResourceField.POWERUP);
-                    powerUps.add(new PowerUp(powerUp, col * WALL_SIZE, row * WALL_SIZE, playerManager, gameObs));
+                if (LAYOUT[row][col] == ResourceField.LIFEPOWERUP.getVal()) {
+                    BufferedImage addLifePowerUp = spriteLoader.loadSprite(ResourceField.LIFEPOWERUP);
+                    powerUps.add(new AddLifePowerUp(addLifePowerUp, col * WALL_SIZE, row * WALL_SIZE, playerManager, gameObs));
                 }
+                if (LAYOUT[row][col] == ResourceField.BULLETPOWERUP.getVal()) {
+                    BufferedImage bulletPowerUp = spriteLoader.loadSprite(ResourceField.BULLETPOWERUP);
+                    powerUps.add(new StrengthenBulletPowerUp(bulletPowerUp, col * WALL_SIZE, row * WALL_SIZE, playerManager, gameObs));
+                }
+
             }
         }
         return powerUps;
