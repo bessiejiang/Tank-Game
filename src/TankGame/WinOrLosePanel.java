@@ -1,7 +1,5 @@
 package TankGame;
 
-import TankGame.GameEvent.WinOrLose;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
