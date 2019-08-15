@@ -18,6 +18,5 @@ public class ModePanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(img, 0,0, 852, 710, this);
-
     }
 }

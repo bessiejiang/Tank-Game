@@ -29,12 +29,12 @@ public class LifePowerUp extends PowerUp
     }
 
     private void handleCollisionWithTank(Tank p1, Tank p2) {
-        if (p1.isCollision(this) && (picked == false)){
+        if (p1.isCollision(this) && (!picked)){
             picked = true;
             p1.setLifeCount(p1.getLifeCount() + 1);
         }
 
-        if (p2.isCollision(this) && (picked == false)){
+        if (p2.isCollision(this) && (!picked)){
             picked = true;
             p2.setLifeCount(p2.getLifeCount() + 1);
         }

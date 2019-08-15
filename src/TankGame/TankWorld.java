@@ -72,7 +72,7 @@ public class TankWorld implements Runnable{
             isRunning = false;
             JLabel winner = new JLabel();;
             winner.setText(tank1.getLifeCount() == 0 ? "Player 2 wins!" : "Player 1 wins!");
-            winner.setFont(new Font("Courier", Font.BOLD, 32));
+            winner.setFont(new Font("Courier", Font.BOLD, 75));
             winOrLosePanel.setLayout(new GridBagLayout());
             winOrLosePanel.add(winner);
             cardLayout.show(cardContainer, "winOrLose");

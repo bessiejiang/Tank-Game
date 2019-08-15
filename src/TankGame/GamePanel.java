@@ -172,7 +172,6 @@ public class GamePanel extends JPanel {
         } else if (windowX >= MAP_WIDTH - FRAME_WIDTH / 2) {
             windowX = MAP_WIDTH - FRAME_WIDTH / 2;
         }
-
         return windowX;
     }
 
@@ -278,7 +277,6 @@ public class GamePanel extends JPanel {
         float t1healthRatio = (float) t1Health / 100;
         float t2healthRatio = (float) t2Health / 100;
 
-        //draw health bar
         //health bar frame
         g.setPaint(Color.black);
         g.drawRect(t1HealthBarX, t1HealthBarY, healthWidth, healthHeight);
@@ -289,13 +287,11 @@ public class GamePanel extends JPanel {
         g.fillRect(t1HealthBarX, t1HealthBarY, (int)(healthWidth * t1healthRatio), healthHeight);
         g.fillRect(t2HealthBarX + (int)(healthWidth *( 1 - t2healthRatio)), t2HealthBarY, (int)(healthWidth * t2healthRatio), healthHeight);
 
-        //draw live count
         int t1LivesX = 270;
         int t1LivesY = 0;
 
         int t2LivesX = 530;
         int t2LivesY = 0;
-
 
         int t1LifeCount = playerManager.getPlayer1().getLifeCount();
         int t2LifeCount = playerManager.getPlayer2().getLifeCount();
@@ -305,14 +301,14 @@ public class GamePanel extends JPanel {
         g.drawImage(tank1Icon, t1LivesX, t1LivesY, null);
         g.setPaint(Color.red);
         g.setFont(new Font("TimesRoman", Font.BOLD, 20));
-        g.drawString("* " + t1LifeCount, 310, 22);
+        g.drawString("x " + t1LifeCount, 310, 22);
 
         // tank2 live count
         BufferedImage tank2Icon = spriteLoader.loadSprite(ResourceField.LIFE_ICON2);
         g.drawImage(tank2Icon, t2LivesX, t2LivesY, null);
         g.setPaint(Color.red);
         g.setFont(new Font("TimesRoman", Font.BOLD, 20));
-        g.drawString(t2LifeCount + " *", 500, 22);
+        g.drawString(t2LifeCount + " x", 500, 22);
 
     }
 
@@ -345,7 +341,6 @@ public class GamePanel extends JPanel {
                     BufferedImage bulletPowerUp = spriteLoader.loadSprite(ResourceField.BULLET_POWER_UP);
                     powerUps.add(new BulletPowerUp(bulletPowerUp, col * WALL_SIZE, row * WALL_SIZE, playerManager, gameObs));
                 }
-
             }
         }
         return powerUps;

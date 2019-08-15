@@ -37,7 +37,5 @@ public class GameObject implements Observer {
     public void setY(int y) { this.y = y; }
 
     @Override
-    public void update(Observable o, Object arg) {
-
-    }
+    public void update(Observable o, Object arg) { }
 }
