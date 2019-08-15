@@ -8,6 +8,7 @@ public enum ResourceField {
     TANK1(3),
     TANK2(4),
     BULLET(5),
+    BULLET2(6),
     LIFEPOWERUP(7),
     BULLETPOWERUP(8),
     LIFEICON1(9),

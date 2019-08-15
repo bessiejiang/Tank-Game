@@ -11,13 +11,18 @@ import java.util.List;
 import java.util.Observable;
 
 public class Tank extends Movable {
+    private static int STRONGER_POWER = 30;
+    private static int POWER = 15;
     private static int FIRE_COOL_DOWN = 75;
+    private static int POWER_COOL_DOWN = 3000;
     private static int LIFE_COOL_DOWN = 100;
     private static int LIFE_POINT = 100;
 
+    private int damage;
     private int angle;
     private int turnSpeed;
     private int fireCoolDown;
+    private int powerCoolDown;
     private int lifeCoolDown;
     private int lifePoint;
     private int lifeCount;
@@ -33,8 +38,10 @@ public class Tank extends Movable {
         this.originX = x;
         this.originY = y;
         this.turnSpeed = turnSpeed;
+        this.damage = POWER;
         this.angle = 0;
         this.fireCoolDown = 0;
+        this.powerCoolDown = POWER_COOL_DOWN;
         this.lifeCoolDown = LIFE_COOL_DOWN;
         this.lifePoint = LIFE_POINT;
         this.lifeCount = 3;
@@ -54,8 +61,6 @@ public class Tank extends Movable {
             AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);
             rotation.rotate(Math.toRadians(angle), img.getWidth(null) / 2, img.getHeight(null) / 2);
             g.drawImage(img, rotation, null);
-        } else {
-
         }
     }
 
@@ -66,39 +71,21 @@ public class Tank extends Movable {
         }
 
         if (lifePoint > 0) {
-            if (shootable && fireCoolDown == 0) {
-                Bullet bullet = new Bullet(spriteLoader.loadSprite(ResourceField.BULLET), getTankCenterX(), getTankCenterY(), angle);
-                bullets.add(bullet);
-                gameObs.addObserver(bullet);
-                fireCoolDown = FIRE_COOL_DOWN; //restart the cooling down
-            }
-
+            updateDamage();
+            updateFiring();
+            updateLocation();
             handleCollisionWithBullets();
             handleCollisionWithTank();
-
-            if (moveLeft) {
-                angle -= turnSpeed;
-            }
-            if (moveRight) {
-                angle += turnSpeed;
-            }
-            if (moveUp) {
-                x = ((int) (x + Math.round(speed * Math.cos(Math.toRadians(angle)))));
-                y = ((int) (y + Math.round(speed * Math.sin(Math.toRadians(angle)))));
-            }
-            if (moveDown) {
-                x = ((int) (x - Math.round(speed * Math.cos(Math.toRadians(angle)))));
-                y = ((int) (y - Math.round(speed * Math.sin(Math.toRadians(angle)))));
-            }
         } else if (lifeCoolDown != 0) {
             lifeCoolDown--;
         } else {
-            lifeCoolDown = LIFE_COOL_DOWN;
-            lifePoint = LIFE_POINT;
-            x = originX;
-            y = originY;
+            resetTank();
             lifeCount--;
         }
+    }
+
+    public void powerUp() {
+        damage = STRONGER_POWER;
     }
 
     public List<Bullet> getBullets() {
@@ -176,7 +163,7 @@ public class Tank extends Movable {
     private void handleCollisionWithBullets() {
         for (Bullet bullet: rivalTank.getBullets()) {
             if (bullet.isVisible() && isCollision(bullet)) {
-                lifePoint -= Bullet.power;
+                lifePoint -= bullet.getDamage();
                 bullet.setVisible(false);
             }
         }
@@ -198,6 +185,56 @@ public class Tank extends Movable {
                 y -= speed * 2;
                 rivalTank.y += speed * 2;
             }
+        }
+    }
+
+    private void resetTank() {
+        lifeCoolDown = LIFE_COOL_DOWN;
+        lifePoint = LIFE_POINT;
+        powerCoolDown = POWER_COOL_DOWN;
+        damage = POWER;
+        x = originX;
+        y = originY;
+    }
+
+    private void updateLocation() {
+        if (moveLeft) {
+            angle -= turnSpeed;
+        }
+        if (moveRight) {
+            angle += turnSpeed;
+        }
+        if (moveUp) {
+            x = ((int) (x + Math.round(speed * Math.cos(Math.toRadians(angle)))));
+            y = ((int) (y + Math.round(speed * Math.sin(Math.toRadians(angle)))));
+        }
+        if (moveDown) {
+            x = ((int) (x - Math.round(speed * Math.cos(Math.toRadians(angle)))));
+            y = ((int) (y - Math.round(speed * Math.sin(Math.toRadians(angle)))));
+        }
+    }
+
+    private void updateFiring() {
+        if (shootable && fireCoolDown == 0) {
+
+            BufferedImage bulletImg = damage == STRONGER_POWER ? spriteLoader.loadSprite(ResourceField.BULLET2)
+                    : spriteLoader.loadSprite(ResourceField.BULLET);
+
+            Bullet bullet = new Bullet(bulletImg, getTankCenterX(), getTankCenterY(), angle, damage);
+            bullets.add(bullet);
+            gameObs.addObserver(bullet);
+            fireCoolDown = FIRE_COOL_DOWN; //restart the cooling down
+        }
+    }
+
+    private void updateDamage() {
+        if (damage == STRONGER_POWER && powerCoolDown != 0) {
+            powerCoolDown--;
+        }
+
+        if (powerCoolDown == 0) {
+            damage = POWER;
+            powerCoolDown = POWER_COOL_DOWN;
         }
     }
 }

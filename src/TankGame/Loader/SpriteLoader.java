@@ -1,5 +1,6 @@
 package TankGame.Loader;
 
+import TankGame.GameObject.Moveable.Bullet;
 import TankGame.GameObject.ResourceField;
 
 import javax.imageio.ImageIO;
@@ -23,6 +24,7 @@ public class SpriteLoader {
         spritesMap.put(TANK1, "/TankGame/resources/Tank1.png");
         spritesMap.put(TANK2, "/TankGame/resources/Tank2.png"  );
         spritesMap.put(BULLET, "/TankGame/resources/Bullet.gif");
+        spritesMap.put(BULLET2, "/TankGame/resources/Bullet2.png");
         spritesMap.put(LIFEPOWERUP, "/TankGame/resources/LifePowerUp.png");
         spritesMap.put(BULLETPOWERUP, "/TankGame/resources/Strengthen.png");
         spritesMap.put(LIFEICON1, "/TankGame/resources/LifeIcon1.png");

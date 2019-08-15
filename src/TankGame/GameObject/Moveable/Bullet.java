@@ -6,15 +6,16 @@ import java.awt.image.BufferedImage;
 import java.util.Observable;
 
 public class Bullet extends Movable {
-    public static int power = 10;
-    private static int speed = 5;
+    private static final int SPEED = 5;
     private int angle;
     private boolean isVisible;
+    private int damage;
 
-    public Bullet(BufferedImage img, int x, int y, int angle) {
-        super(img, x, y, speed);
+    public Bullet(BufferedImage img, int x, int y, int angle, int damage) {
+        super(img, x, y, SPEED);
         this.angle = angle;
         this.isVisible = true;
+        this.damage = damage;
     }
 
     public void draw(Graphics2D g) {
@@ -28,8 +29,8 @@ public class Bullet extends Movable {
     @Override
     public void update(Observable o, Object arg) {
         if (isVisible) {
-            y += Math.round(speed * Math.sin(Math.toRadians(angle)));
-            x += Math.round(speed * Math.cos(Math.toRadians(angle)));
+            y += Math.round(SPEED * Math.sin(Math.toRadians(angle)));
+            x += Math.round(SPEED * Math.cos(Math.toRadians(angle)));
         }
     }
 
@@ -37,10 +38,12 @@ public class Bullet extends Movable {
         this.isVisible = isVisible;
     }
 
-    public void setPower(int power){ this.power = power; }
-
     public boolean isVisible() {
         return isVisible;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
 }
