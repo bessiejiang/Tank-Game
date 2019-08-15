@@ -34,8 +34,8 @@ public class TankWorld implements Runnable{
         cardLayout = new CardLayout();
         cardContainer = new JPanel(cardLayout);
         gamePanel = new GamePanel(playerManager, spriteLoader, gameObs);
-        modePanel = new ModePanel();
-        winOrLosePanel = new WinOrLosePanel();
+        modePanel = new ModePanel(spriteLoader);
+        winOrLosePanel = new WinOrLosePanel(spriteLoader);
         modePanel.setLayout(null);
         keyController = new KeyController(playerManager);
         isRunning = true;

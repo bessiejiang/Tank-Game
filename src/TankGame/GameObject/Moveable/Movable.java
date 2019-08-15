@@ -5,7 +5,7 @@ import TankGame.GameObject.GameObject;
 import java.awt.image.BufferedImage;
 
 public class Movable extends GameObject {
-    protected int speed;
+    int speed;
 
     public Movable(BufferedImage img, int x, int y, int speed) {
         super(img, x,y);

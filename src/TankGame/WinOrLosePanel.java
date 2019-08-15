@@ -1,21 +1,18 @@
 package TankGame;
 
-import javax.imageio.ImageIO;
+import TankGame.GameObject.ResourceField;
+import TankGame.Loader.SpriteLoader;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class WinOrLosePanel extends JPanel {
 
     private BufferedImage img;
 
-    public WinOrLosePanel() {
-        try {
-            img = ImageIO.read(WinOrLosePanel.class.getResourceAsStream("/TankGame/resources/WinOrLose.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public WinOrLosePanel(SpriteLoader spriteLoader) {
+        img = spriteLoader.loadSprite(ResourceField.WIN_OR_LOSE);
     }
 
     @Override

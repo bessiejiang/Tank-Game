@@ -1,20 +1,17 @@
 package TankGame;
 
-import javax.imageio.ImageIO;
+import TankGame.GameObject.ResourceField;
+import TankGame.Loader.SpriteLoader;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class ModePanel extends JPanel {
     private BufferedImage img;
 
-    public ModePanel() {
-        try {
-            img = ImageIO.read(ModePanel.class.getResourceAsStream("/TankGame/resources/Menu.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public ModePanel(SpriteLoader spriteLoader) {
+        img = spriteLoader.loadSprite(ResourceField.MENU);
     }
 
     @Override

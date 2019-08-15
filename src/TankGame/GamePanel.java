@@ -154,9 +154,6 @@ public class GamePanel extends JPanel {
         drawHealthAndLives(boardG2);
         float thickness = 3;
 
-        //set transparency of frame lines
-//        float alpha = (float) 0.3;
-//        Color color = new Color(1, 0,0);
         boardG2.setPaint(Color.black);
 
         Stroke oldStroke = boardG2.getStroke();
@@ -304,14 +301,14 @@ public class GamePanel extends JPanel {
         int t2LifeCount = playerManager.getPlayer2().getLifeCount();
 
         // tank1 live count
-        BufferedImage tank1Icon = spriteLoader.loadSprite(ResourceField.LIFEICON1);
+        BufferedImage tank1Icon = spriteLoader.loadSprite(ResourceField.LIFE_ICON1);
         g.drawImage(tank1Icon, t1LivesX, t1LivesY, null);
         g.setPaint(Color.red);
         g.setFont(new Font("TimesRoman", Font.BOLD, 20));
         g.drawString("* " + t1LifeCount, 310, 22);
 
         // tank2 live count
-        BufferedImage tank2Icon = spriteLoader.loadSprite(ResourceField.LIFEICON2);
+        BufferedImage tank2Icon = spriteLoader.loadSprite(ResourceField.LIFE_ICON2);
         g.drawImage(tank2Icon, t2LivesX, t2LivesY, null);
         g.setPaint(Color.red);
         g.setFont(new Font("TimesRoman", Font.BOLD, 20));
@@ -323,8 +320,8 @@ public class GamePanel extends JPanel {
         List<Wall> Walls = new ArrayList<>();
         for (int row = 0; row < LAYOUT.length; row++) {
             for (int col = 0; col < LAYOUT[0].length; col++) {
-                if (LAYOUT[row][col] == ResourceField.UNBREAKABLEWALL.getVal()) {
-                    BufferedImage wall = spriteLoader.loadSprite(ResourceField.UNBREAKABLEWALL);
+                if (LAYOUT[row][col] == ResourceField.UNBREAKABLE_WALL.getVal()) {
+                    BufferedImage wall = spriteLoader.loadSprite(ResourceField.UNBREAKABLE_WALL);
                     Walls.add(new UnbreakableWall(col * WALL_SIZE, row * WALL_SIZE, wall, playerManager, gameObs));
                 }
                 if (LAYOUT[row][col] == ResourceField.BREAKABLE_WALL.getVal()) {
@@ -340,13 +337,13 @@ public class GamePanel extends JPanel {
         List<PowerUp> powerUps = new ArrayList<>();
         for (int row = 0; row < LAYOUT.length; row++) {
             for (int col = 0; col < LAYOUT[0].length; col++) {
-                if (LAYOUT[row][col] == ResourceField.LIFEPOWERUP.getVal()) {
-                    BufferedImage addLifePowerUp = spriteLoader.loadSprite(ResourceField.LIFEPOWERUP);
-                    powerUps.add(new AddLifePowerUp(addLifePowerUp, col * WALL_SIZE, row * WALL_SIZE, playerManager, gameObs));
+                if (LAYOUT[row][col] == ResourceField.LIFE_POWER_UP.getVal()) {
+                    BufferedImage addLifePowerUp = spriteLoader.loadSprite(ResourceField.LIFE_POWER_UP);
+                    powerUps.add(new LifePowerUp(addLifePowerUp, col * WALL_SIZE, row * WALL_SIZE, playerManager, gameObs));
                 }
-                if (LAYOUT[row][col] == ResourceField.BULLETPOWERUP.getVal()) {
-                    BufferedImage bulletPowerUp = spriteLoader.loadSprite(ResourceField.BULLETPOWERUP);
-                    powerUps.add(new StrengthenBulletPowerUp(bulletPowerUp, col * WALL_SIZE, row * WALL_SIZE, playerManager, gameObs));
+                if (LAYOUT[row][col] == ResourceField.BULLET_POWER_UP.getVal()) {
+                    BufferedImage bulletPowerUp = spriteLoader.loadSprite(ResourceField.BULLET_POWER_UP);
+                    powerUps.add(new BulletPowerUp(bulletPowerUp, col * WALL_SIZE, row * WALL_SIZE, playerManager, gameObs));
                 }
 
             }

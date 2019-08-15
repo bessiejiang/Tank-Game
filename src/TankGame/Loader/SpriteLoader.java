@@ -1,6 +1,5 @@
 package TankGame.Loader;
 
-import TankGame.GameObject.Moveable.Bullet;
 import TankGame.GameObject.ResourceField;
 
 import javax.imageio.ImageIO;
@@ -19,18 +18,18 @@ public class SpriteLoader {
 
     public SpriteLoader() {
         spritesMap.put(BACKGROUND, "/TankGame/resources/Background.jpeg");
-        spritesMap.put(UNBREAKABLEWALL, "/TankGame/resources/Wall1.png");
+        spritesMap.put(MENU, "/TankGame/resources/Menu.png");
+        spritesMap.put(WIN_OR_LOSE, "/TankGame/resources/WinOrLose.png");
+        spritesMap.put(UNBREAKABLE_WALL, "/TankGame/resources/Wall1.png");
         spritesMap.put(BREAKABLE_WALL, "/TankGame/resources/Wall2.png");
         spritesMap.put(TANK1, "/TankGame/resources/Tank1.png");
         spritesMap.put(TANK2, "/TankGame/resources/Tank2.png"  );
         spritesMap.put(BULLET, "/TankGame/resources/Bullet.gif");
         spritesMap.put(BULLET2, "/TankGame/resources/Bullet2.png");
-        spritesMap.put(LIFEPOWERUP, "/TankGame/resources/LifePowerUp.png");
-        spritesMap.put(BULLETPOWERUP, "/TankGame/resources/Strengthen.png");
-        spritesMap.put(LIFEICON1, "/TankGame/resources/LifeIcon1.png");
-        spritesMap.put(LIFEICON2, "/TankGame/resources/LifeIcon2.png");
-
-
+        spritesMap.put(LIFE_POWER_UP, "/TankGame/resources/LifePowerUp.png");
+        spritesMap.put(BULLET_POWER_UP, "/TankGame/resources/Strengthen.png");
+        spritesMap.put(LIFE_ICON1, "/TankGame/resources/LifeIcon1.png");
+        spritesMap.put(LIFE_ICON2, "/TankGame/resources/LifeIcon2.png");
     }
 
     public BufferedImage loadSprite(ResourceField field) {

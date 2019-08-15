@@ -1,15 +1,18 @@
 package TankGame.GameObject.Unmovable;
 
 import TankGame.GameObject.Moveable.Tank;
+import TankGame.PlayerManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 
 public abstract class Wall extends Unmovable {
+    PlayerManager playerManager;
 
-    public Wall(BufferedImage img, int x, int y) {
+    public Wall(BufferedImage img, int x, int y, PlayerManager playerManager) {
         super(img, x, y);
+        this.playerManager = playerManager;
     }
 
     @Override

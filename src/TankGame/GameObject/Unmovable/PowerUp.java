@@ -1,6 +1,5 @@
 package TankGame.GameObject.Unmovable;
 
-import TankGame.GameObject.Moveable.Tank;
 import TankGame.PlayerManager;
 
 import java.awt.*;
@@ -10,7 +9,7 @@ import java.util.Observable;
 public class PowerUp extends Unmovable{
 
     boolean picked = false;
-    private PlayerManager playerManager;
+    PlayerManager playerManager;
 
     public PowerUp(BufferedImage img, int x, int y, PlayerManager playerManager, Observable gameObs) {
         super(img, x, y);
@@ -22,17 +21,5 @@ public class PowerUp extends Unmovable{
         if(!picked) {
             g.drawImage(this.img, this.x, this.y,null);
         }
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        Tank p1 = playerManager.getPlayer1();
-        Tank p2 = playerManager.getPlayer2();
-
-        handleCollisionWithTank(p1, p2);
-    }
-
-    private void handleCollisionWithTank(Tank p1, Tank p2) {
-
     }
 }

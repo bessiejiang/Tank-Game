@@ -9,11 +9,9 @@ import java.awt.image.BufferedImage;
 import java.util.Observable;
 
 public class UnbreakableWall extends Wall {
-    private final PlayerManager playerManager;
 
     public UnbreakableWall(int x, int y, BufferedImage img, PlayerManager playerManager, Observable gameObs){
-        super(img, x, y);
-        this.playerManager = playerManager;
+        super(img, x, y, playerManager);
         gameObs.addObserver(this);
     }
 
