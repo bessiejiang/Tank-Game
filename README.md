@@ -1,11 +1,20 @@
-# csc413-tankgame
+This is a tank game which has two mode: human versus human, human versus computer. 
+Every player has five lives.
 
-## Student Name  :
-## Student ID    :
+Left player: 
+W - Forward
+A - Left rotation
+S - Backward
+D - Right Rotation
+
+Right player:
+up arrow - Forward
+left arrow - Left rotation
+down arrow - Backward
+right arrow - right rotation
+
+Power-ups:
+Pink heart - add one life
+Blue bottle - enhanced power
 
 
-## src folder is to be used to store source code only.
-
-## resources folder is to be used to store the resources for your project only. This includes images, sounds, map text files, etc.
-
-## jar folder is used to store the built jar of your term-project. NO SOURCE CODE SHOULD BE IN THIS FOLDER. DOING SO WILL CAUSE POINTS TO BE DEDUCTED

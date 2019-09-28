@@ -1,5 +1,4 @@
 package TankGame.GameObject;
-
 public enum ResourceField {
     // Sprites
     BACKGROUND(0),
