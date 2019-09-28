@@ -13,3 +13,6 @@ local.properties
 .loadpath
 .recommenders
 *.launch
+.DS_Store/
+.iml
+.DS_Store
